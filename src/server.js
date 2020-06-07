@@ -1,28 +1,23 @@
 const express = require('express')
 const config = require('./config')
-const importFileService = require('./services/import-file')
-const saveToDbService = require('./services/save-to-db')
-const uploadToSourceService = require('./services/upload-to-source')
+const miner = require('./services/miner')
+
+const { v4: uuidv4 } = require('uuid')
 
 const app = express()
 
-app.get('/update', (req, res) => {
-  let { sources } = req.query
-  sources = sources || []
+app.get('/mine', (req, res) => {
+  let { hashes } = req.query
+  hashes = hashes || [uuidv4(), uuidv4(), uuidv4(), uuidv4(), uuidv4(), uuidv4()]
 
-  console.time('full-time')
+  const reqId = uuidv4()
+  console.time(`Time for request: ${reqId}`)
 
-  importFileService()
+  const minedHashes = hashes.map(s => miner(s))
 
-  saveToDbService()
+  console.timeEnd(`Time for request: ${reqId}`)
 
-  for (const source of sources) {
-    uploadToSourceService(source)
-  }
-
-  console.timeEnd('full-time')
-
-  res.status(200).json({ status: 'done' })
+  res.status(200).json({ hashes: minedHashes })
 })
 
 module.exports = function () {

@@ -7,29 +7,15 @@ Con el fin de validar tus conocimientos, quién mejor que el código para compro
 
 ## Heavy tasks
 
-Se trata de un software que importa archivos y procesa resultados.
-Es un web server que escucha cualquier URL un puerto determinado, donde al recibir un request a dicho puerto inicia las tareas de importar, guardar, actualizar.
-Hoy por hoy ejecuta todo dicho procesamiento de forma sincronica, lo que no es un problema ya que tiene poca concurrencia.
-Por cuestiones del negocio se solicita que ese web service soporte una mayor cantidad de peticiones, razon por la cual se desea hacer los cambios pertinentes para optimizar dicho procesamiento.
+Se trata de un software que calcula el proof of work de un hash determinado. Esto es un concepto utilizado en blockchains, no importa eso en si, sino saber que es una tarea pesada que consume mucho uso de CPU.
+El objetivo es opmimizar el server para que:
 
-Esquema de concurrencia actual
-```
-importFileService() -> saveToDbService() -> ... uploadToSourceService()
-````
+1. No sea bloqueante (no bloquear el event loop).
+2. Paralelizar al maximo la ejecucion y aprovechar todos los hilos del CPU y mejorar el tiempo de respuesta de cada request.
 
-Esquema de concurrencia posible
-```
-importFileService() -> saveToDbService()
-                                        -> uploadToSourceService()
-                                        -> uploadToSourceService()
-                                        -> ...
-````
+Tenes la libertad de elegir la estrategia que consideres adecuada.
 
-Como se puede ser importFileService y saveToDbService son de ejecucion secuencial porque hay dependencias uno del otro, pero para el caso de la actualizacion a multiples recursos externos uploadToSourceService, se puede ejecutar totalmente en paralelo.
-
-Tenes la libertad de elegir la estrategia que consideres adecuada y alcanzar el maximo nivel de paralelizmo (esto es muy importante) sin bloquear el event loop.
-
-###### NOTAS:
+##### NOTAS:
 Para evaluar el resultado se valorara lo siguiente:
 1- Uso de standard library de nodejs.
 2- Uso del lenguaje (elegancia en el codigo).
