@@ -17,8 +17,8 @@ Tenes la libertad de elegir la estrategia que consideres adecuada.
 
 ##### NOTAS:
 Para evaluar el resultado se valorara lo siguiente:
-1- Uso de standard library de nodejs.
-2- Uso del lenguaje (elegancia en el codigo).
+1. Uso de standard library de nodejs.
+2. Uso del lenguaje (elegancia en el codigo).
 
 ### Cómo presentar la solución
 Cuando consideres que el problema está resuelto, debes subirlo a un repositorio de tu elección y enviarnos un mail a alamenza@culturait.com.ar con el link de descarga, además podes agregar cualquier comentario que creas correspondiente.
