@@ -7,7 +7,7 @@ Con el fin de validar tus conocimientos, quién mejor que el código para compro
 
 ## Heavy tasks
 
-Se trata de un software que calcula el proof of work de un hash determinado. Esto es un concepto utilizado en blockchains, no importa eso en si, sino saber que es una tarea pesada que consume mucho uso de CPU.
+Se trata de un software que calcula el proof of work de un hash determinado. Esto es un concepto utilizado en blockchains, no importa eso en si, sino entender que es una tarea pesada en terminos de uso de CPU.
 El objetivo es opmimizar el server para que:
 
 1. No sea bloqueante (no bloquear el event loop).
